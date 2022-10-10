@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,700;1,400&display=swap');
+
+:root {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+.App {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(216, 12%, 8%);
+  font-family: "Overpass", sans-serif;
+  padding: 2em;
+}
+
+.feedback-thanks-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.feedback-card,
+.feedback-thanks-card {
+  background-color: hsl(213, 19%, 18%);
+  width: 100%;
+  max-width: 400px;
+  padding: 2em;
+  border-radius: 20px;
+}
+
+.feedback-card__header {
+  color: hsl(0, 0%, 100%);
+}
+
+.feedback-card__heading {
+  margin-bottom: 0;
+}
+
+.feedback-card__text {
+  color: hsl(216, 12%, 54%);
+  font-size: 0.9em;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.feedback-card__submit {
+  cursor: pointer;
+  width: 100%;
+  padding-block: 1em;
+  text-transform: uppercase;
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(25, 97%, 53%);
+  border: none;
+  border-radius: 20px;
+  letter-spacing: .2em;
+  font-weight: 700;
+}
+
+.feedback-card__submit:hover {
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(25, 97%, 53%);
+}
+
+.rating-stats__band {
+  background-color: hsl(216, 12%, 22%);
+  border-radius: 20px;
+  margin-block: .7em;
+  padding: .4em 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating-stats__text {
+  color: hsl(25, 97%, 53%);
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.range-list {
+  padding-left: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  margin-block: 1.7em;
+}
+
+.range-item__button {
+  padding: 1.2em 1.5em;
+  background-color: hsl(216, 12%, 22%);
+  color: hsl(216, 12%, 54%);
+  font-weight: bold;
+  border: none;
+  box-shadow: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.range-item__button:hover {
+  background-color: hsl(25, 97%, 53%);
+  color: hsl(0, 0%, 100%);
+}
+
+.range-item__button:focus,
+.range-item__button:active {
+  background-color: hsl(216, 12%, 54%);
+  color: hsl(0, 0%, 100%);
+}
+
+.round-container {
+  width: fit-content;
+  padding:1em;
+  background-color: hsl(216, 12%, 22%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ty-illustration {
+  padding-block: 1em;
+}
