@@ -1,43 +1,63 @@
 import { useState } from "react";
-import Operator from "./components/Operator";
-import Operand from "./components/Operand";
+import InputButton from "./components/InputButton";
+import CalcScreen from "./components/CalcScreen";
+
 
 function App() {
-  const [firstOperand, setFirstOperand] = useState();
-  const [currentOperator, setCurrentOperator] = useState();
-  const [secondOperand, setSecondOperand] = useState();
+  const [memory, setMemory] = useState();
+  const [operand, setOperand] = useState();
+  const [screenValue, setScreenValue] = useState(0);
 
-  return (
-    <form>
-      <header>
-        <label>
-          <input/>
-        </label>
-      </header>
+  const handleNumClick = (e) => {
+    screenValue === 0
+    ? setScreenValue((prev) => prev = e.target.value)
+    : setScreenValue((prev) => prev += e.target.value)
+  };
 
-      <main>
-        <Operator value="AC"/>
-        <Operator value="+/-"/>
-        <Operator value="%"/>
-        <Operator currentOperator= {currentOperator} setCurrentOperator={setCurrentOperator} value="/"/>
-        <Operand value="7"/>
-        <Operand value="8"/>
-        <Operand value="9"/>
-        <Operator currentOperator= {currentOperator} setCurrentOperator={setCurrentOperator} value="*"/>
-        <Operand value="4"/>
-        <Operand value="5"/>
-        <Operand value="6"/>
-        <Operator currentOperator= {currentOperator} setCurrentOperator={setCurrentOperator} value="-"/>
-        <Operand value="1"/>
-        <Operand value="2"/>
-        <Operand value="3"/>
-        <Operator currentOperator= {currentOperator} setCurrentOperator={setCurrentOperator} value="+"/>
-        <Operand value="0"/>
-        <Operator currentOperator= {currentOperator} setCurrentOperator={setCurrentOperator} value="."/>
-        <Operator currentOperator= {currentOperator} setCurrentOperator={setCurrentOperator} value="="/>
-      </main>
-    </form>
+  const handleOpClick = (e) => {
+    setScreenValue((prev) => prev = "");
+  }
+
+  return(
+    <div>
+      <form>
+        <header>
+          <CalcScreen onChange={(e) => {setOperand((prev => prev = e.target.value))}} value={screenValue}/>
+        </header>
+
+        <main>
+          <InputButton value="AC"/>
+          <InputButton value="+/-" onClick={handleOpClick}/>
+          <InputButton value="%"/>
+          <InputButton value="/"/>
+          <InputButton value="7" onClick={handleNumClick}/>
+          <InputButton value="8"/>
+          <InputButton value="9"/>
+          <InputButton value="*"/>
+          <InputButton value="4"/>
+          <InputButton value="5"/>
+          <InputButton value="6"/>
+          <InputButton value="-"/>
+          <InputButton value="1"/>
+          <InputButton value="2"/>
+          <InputButton value="3"/>
+          <InputButton value="+"/>
+          <InputButton value="0"/>
+          <InputButton value="."/>
+          <InputButton value="="/>
+        </main>
+      </form>
+    </div>
   );
 }
 
 export default App;
+
+/*
+Calc Algorithm
+
+- memory state, current state.
+- user enters first input 
+- 
+
+*/ 
