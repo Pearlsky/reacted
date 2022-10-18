@@ -1,50 +1,95 @@
 import { useState } from "react";
-import InputButton from "./components/InputButton";
+import { Operator, Operand } from "./components/InputButton";
 import CalcScreen from "./components/CalcScreen";
 
-
 function App() {
-  const [memory, setMemory] = useState();
-  const [operand, setOperand] = useState();
-  const [screenValue, setScreenValue] = useState(0);
+  const [memoryOperand, setMemoryOperand] = useState("");
+  const [currentOperand, setCurrentOperand] = useState("");
+  const [screenValue, setScreenValue] = useState("");
+  const [operator, setOperator] = useState("");
 
   const handleNumClick = (e) => {
-    screenValue === 0
-    ? setScreenValue((prev) => prev = e.target.value)
-    : setScreenValue((prev) => prev += e.target.value)
+    if (screenValue && currentOperand) {
+      setScreenValue((prev) => (prev += e.target.value));
+      setCurrentOperand((prev) => (prev += e.target.value));
+    } else {
+      setScreenValue((prev) => (prev = e.target.value));
+      setCurrentOperand((prev) => (prev = e.target.value));
+    }
   };
 
-  const handleOpClick = (e) => {
-    setScreenValue((prev) => prev = "");
-  }
-
-  return(
+  return (
     <div>
       <form>
         <header>
-          <CalcScreen onChange={(e) => {setOperand((prev => prev = e.target.value))}} value={screenValue}/>
+          <CalcScreen
+            onChange={(e) => {
+              setCurrentOperand((prev) => (prev = e.target.value));
+            }}
+            value={screenValue}
+          />
         </header>
 
         <main>
-          <InputButton value="AC"/>
-          <InputButton value="+/-" onClick={handleOpClick}/>
-          <InputButton value="%"/>
-          <InputButton value="/"/>
-          <InputButton value="7" onClick={handleNumClick}/>
-          <InputButton value="8"/>
-          <InputButton value="9"/>
-          <InputButton value="*"/>
-          <InputButton value="4"/>
-          <InputButton value="5"/>
-          <InputButton value="6"/>
-          <InputButton value="-"/>
-          <InputButton value="1"/>
-          <InputButton value="2"/>
-          <InputButton value="3"/>
-          <InputButton value="+"/>
-          <InputButton value="0"/>
-          <InputButton value="."/>
-          <InputButton value="="/>
+          <Operator value="AC" />
+          <Operator value="+/-" />
+          <Operator value="%" />
+          <Operator
+            value="/"
+            memoryOperand={memoryOperand}
+            setMemoryOperand={setMemoryOperand}
+            currentOperand={currentOperand}
+            setCurrentOperand={setCurrentOperand}
+            setScreenValue={setScreenValue}
+            operator={operator}
+            setOperator={setOperator}
+            func={(a, b) => a / b}
+          />
+          <Operand value="7" onClick={handleNumClick} />
+          <Operand value="8" onClick={handleNumClick} />
+          <Operand value="9" onClick={handleNumClick} />
+          <Operator
+            value="*"
+            memoryOperand={memoryOperand}
+            setMemoryOperand={setMemoryOperand}
+            currentOperand={currentOperand}
+            setCurrentOperand={setCurrentOperand}
+            setScreenValue={setScreenValue}
+            operator={operator}
+            setOperator={setOperator}
+            func={(a, b) => (a * b)}
+          />
+          <Operand value="4" onClick={handleNumClick} />
+          <Operand value="5" onClick={handleNumClick} />
+          <Operand value="6" onClick={handleNumClick} />
+          <Operator
+            value="-"
+            memoryOperand={memoryOperand}
+            setMemoryOperand={setMemoryOperand}
+            currentOperand={currentOperand}
+            setCurrentOperand={setCurrentOperand}
+            setScreenValue={setScreenValue}
+            operator={operator}
+            setOperator={setOperator}
+            func={(a, b) => (a - b)}
+          />
+          <Operand value="1" onClick={handleNumClick} />
+          <Operand value="2" onClick={handleNumClick} />
+          <Operand value="3" onClick={handleNumClick} />
+          <Operator
+            value="+"
+            memoryOperand={memoryOperand}
+            setMemoryOperand={setMemoryOperand}
+            currentOperand={currentOperand}
+            setCurrentOperand={setCurrentOperand}
+            setScreenValue={setScreenValue}
+            operator={operator}
+            setOperator={setOperator}
+            func={(a, b) => (a + b)}
+          />
+          <Operand value="0" onClick={handleNumClick} />
+          <Operator value="." />
+          <Operator value="=" />
         </main>
       </form>
     </div>
@@ -56,8 +101,10 @@ export default App;
 /*
 Calc Algorithm
 
-- memory state, current state.
+- memory state: stores the total always.
+- current state: stores the current input
 - user enters first input 
+- if he clicks an operator, first input goes to memory state
 - 
 
-*/ 
+*/
