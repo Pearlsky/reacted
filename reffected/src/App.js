@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import Users from "./components/Users";
-import Pagination from "./components/Pagination";
+import Users from "./components/Users/Users";
+import Pagination from "./components/Users/Pagination";
 
 function App() {
   const [users, setUsers] = useState([]);
