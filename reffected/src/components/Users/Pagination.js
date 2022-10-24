@@ -28,7 +28,7 @@ function Pagination({ users, usersPerPage, currentPage, setCurrentPage }) {
         <nav className="page-nav">
           <ul className="page-nav__list">
             <li key="page-prev">
-              <button onClick={() => prevPageHandler()}>Prev</button>
+              <button disabled={currentPage === 1 ? true : false} onClick={() => prevPageHandler()}>Prev</button>
             </li>
             {pageNumbers.map((pageNumber, index) => {
               return (
@@ -40,7 +40,7 @@ function Pagination({ users, usersPerPage, currentPage, setCurrentPage }) {
               );
             })}
             <li key="page-next">
-              <button onClick={() => nextPageHandler()}>Next</button>
+              <button disabled={currentPage === (nPages) ? true : false} onClick={() => nextPageHandler()}>Next</button>
             </li>
           </ul>
         </nav>

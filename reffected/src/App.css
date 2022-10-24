@@ -46,6 +46,11 @@ header a.btn {
   width: 9rem;
 }
 
+ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
 .btn {
   background: var(--button-bg);
   color: var(--light-text);
@@ -70,19 +75,6 @@ a.btn {
   background-color: var(--primary);
 }
 
-.btn-delete {
-  background: var(--error);
-  color: white;
-}
-
-.btn > svg:first-child {
-  margin-right: 0.4rem;
-}
-
-.btn > svg:last-child {
-  margin-left: 0.4rem;
-}
-
 .btn:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
@@ -96,12 +88,6 @@ a.btn {
   border-color: var(--light-text);
 }
 
-
-ul {
-  padding-left: 0;
-  list-style-type: none;
-}
-
 .container {
   width: 100%;
 }
@@ -111,6 +97,34 @@ ul {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-block: 5em;
+}
+
+.page-nav button {
+  color: blue;
+  background-color: white;
+  border: solid 1px #ccc;
+  border-radius: 2px;
+  padding: 0.5em 0.7em;
+}
+
+.page-nav button:disabled {
+  background-color: #ccca;
+  color: #aaa;
+}
+
+.page-nav button:hover {
+  border-color: blue;
+}
+
+.page-nav button.active {
+  background-color: blue;
+  color: white;
+  border-color: blue;
+}
+
+.page-nav__list {
+  display: flex;
 }
 
 .users {
@@ -132,7 +146,7 @@ ul {
   flex-direction: column;
   border: solid 1px #ccca;
   border-radius: 5px;
-  box-shadow: .2px .2px 2px 1px rgb(226, 226, 243);
+  box-shadow: 0.2px 0.2px 2px 1px rgb(226, 226, 243);
   padding: 1em;
 }
 
@@ -169,31 +183,4 @@ ul {
 
 .user-card__location {
   color: blue;
-}
-
-.page-nav button {
-    color: blue;
-    background-color: white;
-    border: solid 1px #ccc;
-    border-radius: 2px;
-    padding: .5em .7em;
-}
-
-.page-nav button:hover{
-  border-color: blue;
-}
-
-.page-nav button:active{
-  background-color: blue;
-  color: white;
-  border-color: blue;
-}
-
-.page-nav__list {
-  display: flex;
-}
-
-button.active {
-  background-color: blue;
-  color: white;
 }
