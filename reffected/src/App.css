@@ -2,9 +2,6 @@
   box-sizing: border-box;
   --primary: #173f5f;
   --button-bg: #20639b;
-  --error: #ed553b;
-  --secondary: #3caea3;
-  --dark-text: #444;
   --light-text: #fff;
 }
 
