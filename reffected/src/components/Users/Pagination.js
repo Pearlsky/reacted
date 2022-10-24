@@ -12,13 +12,13 @@ function Pagination({ users, usersPerPage, currentPage, setCurrentPage }) {
 
   const prevPageHandler = () => {
     if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1 )
+      setCurrentPage((prev) => prev - 1);
     }
   };
 
   const nextPageHandler = () => {
     if (currentPage < nPages) {
-      setCurrentPage((prev) => prev + 1 )
+      setCurrentPage((prev) => prev + 1);
     }
   };
 
@@ -30,11 +30,15 @@ function Pagination({ users, usersPerPage, currentPage, setCurrentPage }) {
             <li key="page-prev">
               <button onClick={() => prevPageHandler()}>Prev</button>
             </li>
-            {pageNumbers.map((pageNumber, index) => (
-              <li key={`page-${index}`}>
-                <button onClick={() => pageSelectHandler(pageNumber)}>{pageNumber}</button>
-              </li>
-            ))}
+            {pageNumbers.map((pageNumber, index) => {
+              return (
+                <li key={`page-${index}`}>
+                  <button className={pageNumber === currentPage ? "active" : ""} onClick={() => pageSelectHandler(pageNumber)}>
+                    {pageNumber}
+                  </button>
+                </li>
+              );
+            })}
             <li key="page-next">
               <button onClick={() => nextPageHandler()}>Next</button>
             </li>

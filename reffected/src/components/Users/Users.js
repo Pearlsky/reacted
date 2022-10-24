@@ -1,48 +1,48 @@
-import { Oval } from "react-loader-spinner";
+import { useState, useEffect } from "react";
+import Pagination from "./Pagination";
+import UsersLists from "./UsersList";
 
-function Users({ loading, users }) {
-  const theUsers = users.map((user, index) => {
-    return (
-      <li className="user-card" key={index}>
-        <div className="user-card-header">
-          <img src={`${user.picture.medium}`} alt="user-img" />
-        </div>
-        <div className="user-card-body">
-          <p className="user-card__name">{`${user.name.title}. ${user.name.first} ${user.name.last}`}</p>
-          <p className="user-card__email">{user.email}</p>
-          <div className="user-card__genage">
-            <span>{user.gender}</span>
-            <span>{user.dob.age}</span>
-          </div>
-          <p className="user-card__location">{`${user.location.country} (${user.nat})`}</p>
-        </div>
-      </li>
-    );
-  });
+function Users() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(15);
 
-  if (loading) {
-    return (
-      <>
-        <Oval
-          ariaLabel="loading-indicator"
-          height={100}
-          width={100}
-          strokeWidth={5}
-          strokeWidthSecondary={5}
-          color="blue"
-          secondaryColor="white"
-        />
-      </>
-    );
-  } else {
-    return (
-      <>
-        <section className="users">
-          <ul className="users-grid">{theUsers}</ul>
-        </section>
-      </>
-    );
-  }
+  useEffect(() => {
+    setLoading(true);
+
+    const fetchUsers = () => {
+      fetch(
+        "https://randomuser.me/api/?results=100&inc=gender,name,nat,location,email,dob,picture,id&noinfo"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setUsers(data.results);
+          setLoading(false);
+        })
+        .catch(() => {
+          throw new Error();
+        });
+    };
+
+    fetchUsers();
+  }, []);
+
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  return (
+    <main className="main">
+      <UsersLists loading={loading} users={currentUsers} />
+      <Pagination
+        users={users}
+        usersPerPage={usersPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+    </main>
+  );
 }
 
 export default Users;
