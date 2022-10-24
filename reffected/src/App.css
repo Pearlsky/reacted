@@ -18,3 +18,26 @@ ul {
   height: 100vh;
 }
 
+.page-nav button {
+    color: blue;
+    background-color: white;
+    border: solid 1px #ccc;
+    border-radius: 2px;
+    padding: .5em .7em;
+}
+
+.page-nav button:hover{
+  border-color: blue;
+}
+
+.page-nav button:active,
+.page-nav button:focus {
+  background-color: blue;
+  color: white;
+  border-color: blue;
+}
+
+.page-nav__list {
+  display: flex;
+}
+

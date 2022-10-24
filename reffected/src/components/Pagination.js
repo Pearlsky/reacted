@@ -26,7 +26,7 @@ function Pagination({ users, usersPerPage, currentPage, setCurrentPage }) {
     <>
       <section className="page-controls">
         <nav className="page-nav">
-          <ul>
+          <ul className="page-nav__list">
             <li key="page-prev">
               <button onClick={() => prevPageHandler()}>Prev</button>
             </li>
