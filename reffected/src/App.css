@@ -18,6 +18,24 @@ ul {
   height: 100vh;
 }
 
+.users-grid {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
+  grid-template-rows: auto;
+  gap: 1em;
+}
+
+.user-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #aaa;
+  border-radius: 5px;
+}
+
+
 .page-nav button {
     color: blue;
     background-color: white;
