@@ -32,8 +32,8 @@ return (
     </header>
 
     <Routes>
-      <Route path="/bookings" element={<Dashboard />} />
-      <Route path="/bookables" element={<Portals />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/portals" element={<Portals />} />
       <Route path="/users" element={<Users />} />
     </Routes>
   </div>
