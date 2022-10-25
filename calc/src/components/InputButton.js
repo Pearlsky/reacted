@@ -1,5 +1,6 @@
 function Operator({
   value,
+  className,
   memoryOperand,
   setMemoryOperand,
   currentOperand,
@@ -26,11 +27,15 @@ function Operator({
     setOperator((prev) => (prev = func));
   };
 
-  return <input type="button" value={value} onClick={handleOperClick} />;
+  return <input className={`btn btn-operator ${className}`} type="button" value={value} onClick={handleOperClick} />;
 }
 
-function Operand({ value, onClick }) {
-  return <input type="button" value={value} onClick={onClick} />;
+function Operand({ value, onClick, className }) {
+  return <input className={`btn btn-operand ${className}`} type="button" value={value} onClick={onClick} />;
 }
 
-export { Operator, Operand };
+function Operations({ value, onClick, className}) {
+  return <input className={`btn ${className}`} type="button" value={value} onClick={onClick} />;
+}
+
+export { Operator, Operand, Operations };

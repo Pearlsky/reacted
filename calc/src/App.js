@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Operator, Operand } from "./components/InputButton";
+import { Operator, Operand, Operations } from "./components/InputButton";
 import CalcScreen from "./components/CalcScreen";
+import "./App.css";
 
 function App() {
   const [memoryOperand, setMemoryOperand] = useState("");
@@ -19,78 +20,80 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app">
       <form>
-        <header>
-          <CalcScreen
-            onChange={(e) => {
-              setCurrentOperand((prev) => (prev = e.target.value));
-            }}
-            value={screenValue}
-          />
-        </header>
+        <section className="calc">
+          <header className="calc-head">
+            <CalcScreen
+              onChange={(e) => {
+                setCurrentOperand((prev) => (prev = e.target.value));
+              }}
+              value={screenValue}
+            />
+          </header>
 
-        <main>
-          <Operator value="AC" />
-          <Operator value="+/-" />
-          <Operator value="%" />
-          <Operator
-            value="/"
-            memoryOperand={memoryOperand}
-            setMemoryOperand={setMemoryOperand}
-            currentOperand={currentOperand}
-            setCurrentOperand={setCurrentOperand}
-            setScreenValue={setScreenValue}
-            operator={operator}
-            setOperator={setOperator}
-            func={(a, b) => a / b}
-          />
-          <Operand value="7" onClick={handleNumClick} />
-          <Operand value="8" onClick={handleNumClick} />
-          <Operand value="9" onClick={handleNumClick} />
-          <Operator
-            value="*"
-            memoryOperand={memoryOperand}
-            setMemoryOperand={setMemoryOperand}
-            currentOperand={currentOperand}
-            setCurrentOperand={setCurrentOperand}
-            setScreenValue={setScreenValue}
-            operator={operator}
-            setOperator={setOperator}
-            func={(a, b) => (a * b)}
-          />
-          <Operand value="4" onClick={handleNumClick} />
-          <Operand value="5" onClick={handleNumClick} />
-          <Operand value="6" onClick={handleNumClick} />
-          <Operator
-            value="-"
-            memoryOperand={memoryOperand}
-            setMemoryOperand={setMemoryOperand}
-            currentOperand={currentOperand}
-            setCurrentOperand={setCurrentOperand}
-            setScreenValue={setScreenValue}
-            operator={operator}
-            setOperator={setOperator}
-            func={(a, b) => (a - b)}
-          />
-          <Operand value="1" onClick={handleNumClick} />
-          <Operand value="2" onClick={handleNumClick} />
-          <Operand value="3" onClick={handleNumClick} />
-          <Operator
-            value="+"
-            memoryOperand={memoryOperand}
-            setMemoryOperand={setMemoryOperand}
-            currentOperand={currentOperand}
-            setCurrentOperand={setCurrentOperand}
-            setScreenValue={setScreenValue}
-            operator={operator}
-            setOperator={setOperator}
-            func={(a, b) => (a + b)}
-          />
-          <Operand value="0" onClick={handleNumClick} />
-          <Operator value="." />
-          <Operator value="=" />
-        </main>
+          <main className="calc-body">
+            <Operations className={"btn-other"} value="AC" onClick={() => {setMemoryOperand(""); setScreenValue("");}}/>
+            <Operations className={"btn-other"} value="+/-" />
+            <Operations className={"btn-other"} value="%" />
+            <Operator
+              value="/"
+              memoryOperand={memoryOperand}
+              setMemoryOperand={setMemoryOperand}
+              currentOperand={currentOperand}
+              setCurrentOperand={setCurrentOperand}
+              setScreenValue={setScreenValue}
+              operator={operator}
+              setOperator={setOperator}
+              func={(a, b) => a / b}
+            />
+            <Operand value="7" onClick={handleNumClick} />
+            <Operand value="8" onClick={handleNumClick} />
+            <Operand value="9" onClick={handleNumClick} />
+            <Operator
+              value="x"
+              memoryOperand={memoryOperand}
+              setMemoryOperand={setMemoryOperand}
+              currentOperand={currentOperand}
+              setCurrentOperand={setCurrentOperand}
+              setScreenValue={setScreenValue}
+              operator={operator}
+              setOperator={setOperator}
+              func={(a, b) => a * b}
+            />
+            <Operand value="4" onClick={handleNumClick} />
+            <Operand value="5" onClick={handleNumClick} />
+            <Operand value="6" onClick={handleNumClick} />
+            <Operator
+              value="-"
+              memoryOperand={memoryOperand}
+              setMemoryOperand={setMemoryOperand}
+              currentOperand={currentOperand}
+              setCurrentOperand={setCurrentOperand}
+              setScreenValue={setScreenValue}
+              operator={operator}
+              setOperator={setOperator}
+              func={(a, b) => a - b}
+            />
+            <Operand value="1" onClick={handleNumClick} />
+            <Operand value="2" onClick={handleNumClick} />
+            <Operand value="3" onClick={handleNumClick} />
+            <Operator
+              value="+"
+              memoryOperand={memoryOperand}
+              setMemoryOperand={setMemoryOperand}
+              currentOperand={currentOperand}
+              setCurrentOperand={setCurrentOperand}
+              setScreenValue={setScreenValue}
+              operator={operator}
+              setOperator={setOperator}
+              func={(a, b) => a + b}
+            />
+            <Operand className="btn-zero" value="0" onClick={handleNumClick} />
+            <Operand value="." />
+            <Operations className="btn-equals" onClick={() => {setScreenValue(memoryOperand);}} value="="/>
+          </main>
+        </section>
       </form>
     </div>
   );
