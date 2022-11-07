@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import "../App.css";
 import Dashboard from "./Dashboard/Dashbord";
+import ErrorBoundary from "./ErrorBoundary";
 import Portals from "./Portals/Portals";
 import Users from "./Users/Users";
 
@@ -33,7 +34,7 @@ return (
 
     <Routes>
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/portals" element={<Portals />} />
+      <Route path="/portals" element={<ErrorBoundary><Portals /></ErrorBoundary>} />
       <Route path="/users" element={<Users />} />
     </Routes>
   </div>
