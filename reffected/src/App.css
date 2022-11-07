@@ -12,7 +12,6 @@
 }
 
 body {
-  background: var(--page-bg);
   margin: 0;
   font-size: 16px;
   font-family: sans-serif;
@@ -87,6 +86,27 @@ a.btn {
 
 .container {
   width: 100%;
+}
+
+.error-body {
+  width: 100%;
+  max-width: 1000px;
+  margin-inline: auto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.error-body h1 {
+  margin-top: 0;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 7rem;
+}
+
+.error-body p {
+  color:#20639b;
 }
 
 .main {
