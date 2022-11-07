@@ -5,7 +5,11 @@ function Users({ loading, users }) {
     return (
       <li className="user-card" key={index}>
         <div className="user-card-header">
-          <img src={`${user.picture.large}`} className="user-card__img" alt="user-img" />
+          <img
+            src={`${user.picture.large}`}
+            className="user-card__img"
+            alt="user-img"
+          />
         </div>
         <div className="user-card-body">
           <p className="user-card__name">{`${user.name.title}. ${user.name.first} ${user.name.last}`}</p>
@@ -14,7 +18,10 @@ function Users({ loading, users }) {
             <span>{user.gender}</span>
             <span>{user.dob.age}</span>
           </div>
-          <p className="user-card__location">{`${user.location.country} (${user.nat})`}</p>
+          <div>
+            <p className="user-card__location">{`${user.location.country} (${user.nat})`}</p>
+            
+          </div>
         </div>
       </li>
     );
