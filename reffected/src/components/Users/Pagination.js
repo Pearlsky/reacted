@@ -7,6 +7,9 @@ function Pagination({ users, usersPerPage, currentPage, setCurrentPage }) {
   }
 
   const pageSelectHandler = (num) => {
+    if (num === 8) {
+      throw new Error();
+    }
     setCurrentPage(num);
   };
 
