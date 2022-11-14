@@ -2,10 +2,10 @@ import { Fragment, useEffect, useReducer } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { getData } from "../../utils/api";
 import BookablesReducer from "./BookablesReducer";
-import data from "../../static.json";
+// import data from "../../static.json";
 
 export default function BookablesList() {
-  const {sessions, days} = data;
+  // const {sessions, days} = data;
 
   const initialState = {
     bookableIndex: 0,
