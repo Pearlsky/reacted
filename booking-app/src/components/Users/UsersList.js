@@ -1,14 +1,23 @@
-import { Fragment, useState } from "react";
-import data from "../../static.json";
+import { Fragment, useEffect, useState } from "react";
 
 export default function UsersList() {
+  const [users, setUsers] = useState(null);
   const [userIndex, setUserIndex] = useState(0);
+  useEffect(() => {
+    fetch("http://localhost:3001/users")
+    .then(response => response.json())
+    .then(data => {setUsers(data)})
+    .catch((err) => {throw new Error(`An ${err.type} just occured: ${err.message}`)})
+  }, []);
+
   const userSelectHandler = (index) => {
     setUserIndex(index);
   };
-  const { users } = data;
+  const user = users && users[userIndex];
 
-  const user = users[userIndex];
+  if (users === null) {
+    return <h1>Loading...</h1>
+  }
 
   return (
     <Fragment>
