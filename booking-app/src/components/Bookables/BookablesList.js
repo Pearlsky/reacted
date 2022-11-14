@@ -1,26 +1,37 @@
-import { Fragment, useReducer } from "react";
+import { Fragment, useEffect, useReducer } from "react";
 import { FaArrowRight } from "react-icons/fa";
-import data from "../../static.json";
+import { getData } from "../../utils/api";
 import BookablesReducer from "./BookablesReducer";
+import data from "../../static.json";
 
 export default function BookablesList() {
+  const {sessions, days} = data;
 
   const initialState = {
     bookableIndex: 0,
     group: "Kit",
     hasDetails: false,
-    bookables: data.bookables,
+    isLoading: true,
+    bookables: [],
+    error: false
   };
 
-  const [{bookableIndex, group, hasDetails, bookables}, dispatch] = useReducer(BookablesReducer, initialState);
+  const [{bookableIndex, group, hasDetails, bookables, isLoading, error}, dispatch] = useReducer(BookablesReducer, initialState);
   
-  const bookablesInGroup = bookables.filter(
+  const bookablesInGroup = bookables&&bookables.filter(
     (bookable) => bookable.group === group
   );
-  const groups = [...new Set(bookables.map((b) => b.group))];
-  console.log(groups);
+  const groups = [...new Set(bookables&&bookables.map((b) => b.group))];
 
   const bookable = bookablesInGroup[bookableIndex];
+
+  useEffect(() => {
+    dispatch({type: "FETCH_BOOKABLES_REQUEST"});
+
+    getData("http://localhost:3001/bookables")
+    .then(bookables => dispatch({type: "FETCH_BOOKABLES_SUCCESS", payload: bookables}))
+    .catch(error => dispatch({type: "FETCH_BOOKABLES_ERROR", payload: error}));
+  }, []);
 
   function changeBookableIndex (index) {
     dispatch({
@@ -46,6 +57,14 @@ export default function BookablesList() {
     dispatch({
       type: "TOGGLE_HAS_DETAILS"
     });
+  }
+
+  if(isLoading) {
+    return <p>Loading bookables</p>;
+  }
+
+  if(error) {
+    return <p>{error.message}</p>;
   }
 
   return (
