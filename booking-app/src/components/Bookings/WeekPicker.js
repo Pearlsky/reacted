@@ -1,10 +1,31 @@
-import { useReducer } from "react";
+import { useReducer, useRef } from "react";
 import WeekReducer from "./WeekReducer";
-import { FaChevronLeft, FaCalendarDay, FaChevronRight } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaCalendarDay,
+  FaCalendarCheck,
+  FaChevronRight,
+} from "react-icons/fa";
 import { getWeek } from "../../utils/date-wrangler";
 
 export default function WeekPicker({ date }) {
+  // tracking input value perchange using state
+  // const [dateText, setDateText] = useState("");
+  const dateTextboxRef = useRef();
   const [week, dispatch] = useReducer(WeekReducer, date, getWeek);
+
+  const goToDate = () => {
+    dispatch({
+      type: "SET_DATE",
+
+      // payload for uncontrolled input
+      payload: dateTextboxRef.current.value
+
+      // payload for controlled input
+      // payload: dateText
+    });
+  };
+
   return (
     <div>
       <p className="date-picker">
@@ -16,6 +37,20 @@ export default function WeekPicker({ date }) {
           <FaCalendarDay />
           <span>Today</span>
         </button>
+        <span>
+          <input
+            type="text"
+            ref={dateTextboxRef}
+            placeholder="e.g. 2020-09-02"
+            defaultValue="2020-06-24"
+            // onChange={(e) => {setDateText(e.target.value)}}
+          />
+          <button className="go btn" onClick={goToDate}>
+            <FaCalendarCheck />
+            <span>Go</span>
+          </button>
+        </span>
+
         <button className="btn" onClick={() => dispatch({ type: "NEXT_WEEK" })}>
           <span>Next</span>
           <FaChevronRight />
