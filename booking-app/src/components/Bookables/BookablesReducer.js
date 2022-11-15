@@ -1,6 +1,6 @@
 export default function BookablesReducer(state, action) {
   switch (action.type) {
-    case "SET_BOOKABLE_INDEX":
+    case "SET_BOOKABLE":
       return { ...state, bookableIndex: action.payload };
 
     case "SET_GROUP":
