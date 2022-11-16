@@ -1,71 +1,56 @@
-import { Fragment, useEffect, useReducer, useRef } from "react";
+import { useEffect } from "react";
+import { Fragment, useRef } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { getData } from "../../utils/api";
-import BookablesReducer from "./BookablesReducer";
-// import data from "../../static.json";
 
-const initialState = {
-  bookableIndex: 0,
-  group: "Kit",
-  hasDetails: false,
-  isLoading: true,
-  bookables: [],
-  error: false
-};
-
-export default function BookablesList() {
-  // const {sessions, days} = data;
-
+export default function BookablesList({ state, dispatch }) {
   const nextButtonRef = useRef();
-  const [{bookableIndex, group, hasDetails, bookables, isLoading, error}, dispatch] = useReducer(BookablesReducer, initialState);
 
-  const bookablesInGroup = bookables&&bookables.filter(
-    (bookable) => bookable.group === group
-  );
-  const groups = [...new Set(bookables&&bookables.map((b) => b.group))];
-
-  const bookable = bookablesInGroup[bookableIndex];
+  const { bookables, bookableIndex, group } = state;
+  const { isLoading, error } = state;
 
   useEffect(() => {
-    dispatch({type: "FETCH_BOOKABLES_REQUEST"});
+    dispatch({ type: "FETCH_BOOKABLES_REQUEST" });
 
     getData("http://localhost:3001/bookables")
-    .then(bookables => dispatch({type: "FETCH_BOOKABLES_SUCCESS", payload: bookables}))
-    .catch(error => dispatch({type: "FETCH_BOOKABLES_ERROR", payload: error}));
-  }, []);
+      .then((bookables) =>
+        dispatch({ type: "FETCH_BOOKABLES_SUCCESS", payload: bookables })
+      )
+      .catch((error) =>
+        dispatch({ type: "FETCH_BOOKABLES_ERROR", payload: error })
+      );
+  }, [dispatch]);
 
-  function changeBookableIndex (index) {
+  const groups = [...new Set(bookables && bookables.map((b) => b.group))];
+  const bookablesInGroup =
+    bookables && bookables.filter((bookable) => bookable.group === group);
+
+  function changeBookableIndex(index) {
     dispatch({
       type: "SET_BOOKABLE",
-      payload: index
+      payload: index,
     });
     nextButtonRef.current.focus();
   }
 
-  function changeGroup (e) {
+  function changeGroup(e) {
     dispatch({
       type: "SET_GROUP",
-      payload: e.target.value
-    });
-  }
-  
-  function nextBookable () {
-    dispatch({
-      type: "NEXT_BOOKABLE"
+      payload: e.target.value,
     });
   }
 
-  function changeHasDetails () {
+  function nextBookable() {
     dispatch({
-      type: "TOGGLE_HAS_DETAILS"
+      type: "NEXT_BOOKABLE",
     });
   }
 
-  if(isLoading) {
+  if (isLoading) {
     return <p>Loading bookables</p>;
   }
 
-  if(error) {
+  if (error) {
     return <p>{error.message}</p>;
   }
 
@@ -100,49 +85,17 @@ export default function BookablesList() {
         </ul>
 
         <p>
-          <button className="btn" onClick={nextBookable} ref={nextButtonRef} autoFocus>
+          <button
+            className="btn"
+            onClick={nextBookable}
+            ref={nextButtonRef}
+            autoFocus
+          >
             <FaArrowRight />
             <span>Next</span>
           </button>
         </p>
       </div>
-
-      {bookable && (
-        <div className="bookable-details">
-          <div className="item">
-            <div className="item-header">
-              <h2>{bookable.title}</h2>
-              <span className="controls">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={hasDetails}
-                    onChange={() => {changeHasDetails()}}
-                  />
-                </label>
-              </span>
-            </div>
-            <p>{bookable.notes}</p>
-            {hasDetails && (
-              <div className="item-details">
-                <h3>Availability</h3>
-                <div className="bookable-availability">
-                  <ul>
-                    {bookable.days.sort().map((d) => (
-                      <li key={d}>{[d]}</li>
-                    ))}
-                  </ul>
-                  <ul>
-                    {bookable.sessions.map((s) => (
-                      <li key={s}>{[s]}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </Fragment>
   );
 }
