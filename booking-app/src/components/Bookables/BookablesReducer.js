@@ -12,9 +12,6 @@ export default function BookablesReducer(state, action) {
       ).length;
       return { ...state, bookableIndex: (state.bookableIndex + 1) % count };
 
-    case "TOGGLE_HAS_DETAILS":
-      return { ...state, hasDetails: !state.hasDetails };
-
     case "FETCH_BOOKABLES_REQUEST":
       return {
         ...state,
