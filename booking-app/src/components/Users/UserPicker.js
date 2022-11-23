@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Spinner from "../UI/Spinner";
+import UserContext from "./UserContext";
 
-export default function UserPicker({ user, setUser }) {
+export default function UserPicker() {
   const [users, setUsers] = useState(null);
+  const {user , setUser} = useContext(UserContext);
 
   useEffect(() => {
     fetch("http://localhost:3001/users")
@@ -30,7 +32,7 @@ export default function UserPicker({ user, setUser }) {
   return (
     <select className="user-picker" onChange={handleSelect} value={user?.id}>
       {users.map((u, i) => (
-        <option key={u.id}>{u.name}</option>
+        <option key={u.id} value={u.id}>{u.name}</option>
       ))}
     </select>
   );

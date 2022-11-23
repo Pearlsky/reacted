@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Spinner from "../UI/Spinner";
 
-export default function UsersList({ user, setUser }) {
+export default function UsersList({ user }) {
   const [users, setUsers] = useState(null);
 
   useEffect(() => {
@@ -13,20 +13,25 @@ export default function UsersList({ user, setUser }) {
       .catch((err) => {
         throw new Error(`An ${err.type} just occured: ${err.message}`);
       });
-  }, [setUser]);
+  }, []);
 
   if (users === null) {
-    return <p><Spinner/> Loading users...</p>;
+    return (
+      <p>
+        <Spinner /> Loading users...
+      </p>
+    );
   }
 
   return (
     <div>
       <ul className="users items-list-nav">
-        {users.map((b) => (
-          <li key={b.id} className={b.id === user?.["id"] ? "selected" : null}>
-            <button className="btn" onClick={() => setUser(b)}>
-              {b.name}
-            </button>
+        {users.map((u) => (
+          <li
+            key={u.id}
+            className={u.id === user.id ? "selected" : null}
+          >
+            <button className="btn">{u.name}</button>
           </li>
         ))}
       </ul>
