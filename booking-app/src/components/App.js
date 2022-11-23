@@ -12,10 +12,10 @@ import UserPicker from "./Users/UserPicker";
 import UserContext from "./Users/UserContext";
 
 export default function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={{user, setUser}}>
       <BrowserRouter>
         <div className="App">
           <header>
@@ -41,7 +41,7 @@ export default function App() {
                 </li>
               </ul>
             </nav>
-            <UserPicker user={user} setUser={setUser}/>
+            <UserPicker/>
           </header>
 
           <Routes>
